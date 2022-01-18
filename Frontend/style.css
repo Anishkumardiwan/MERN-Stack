@@ -1,0 +1,18 @@
+
+.container {
+    height: 100vh;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: row; /* row-reverse , column , colum-reverse*/
+    justify-content: space-around; /* main line */
+    align-items: flex-start; /* cross line */
+    flex-wrap: wrap; /* Default is NoWrap*/
+    text-align: center;
+}
+
+.box{
+    width: 130px;
+    height: 130px;
+    background-color: skyblue;
+    border: 2px solid black;
+}
