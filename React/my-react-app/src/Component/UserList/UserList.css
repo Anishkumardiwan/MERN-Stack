@@ -1,0 +1,13 @@
+.all-users-box
+{
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.head-box{
+    /* border: 1px solid red; */
+    text-align: center;
+    font-size: 22px;
+}

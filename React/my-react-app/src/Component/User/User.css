@@ -1,0 +1,17 @@
+.user-box{
+    /* border: 15px solid aqua; */
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.image-box{
+    border: 1.5px solid grey;
+    text-align: center;
+}
+
