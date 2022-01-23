@@ -1,0 +1,24 @@
+.container{
+    height: 100vh;
+    text-align: center;
+    border: 1px solid red;
+}
+/* 
+.allItems{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+} */
+
+/* .allItems ul{
+    border: 10px solid slateblue;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.allItems li{
+    width: 200px;
+    height: 200px;
+} */
