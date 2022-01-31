@@ -5,8 +5,9 @@ import { React, Component } from 'react';
 
 class LoginForm extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
+        // console.log(props);
         this.state = {
             email: "",
             password: ""
@@ -32,12 +33,6 @@ class LoginForm extends Component {
         })
     }
 
-    onLogin() {
-        // console.log("User trying to log in");
-
-        console.log(this.state);
-    }
-
     render() {
         return (
             <div className='loginForm'>
@@ -54,7 +49,7 @@ class LoginForm extends Component {
                         <FloatingLabel controlId="floatingPassword" label="Password">
                             <Form.Control type="password" onChange={(e) => this.onPassChange(e)} value={this.state.password} placeholder="Password" />
                         </FloatingLabel>
-                        <Button onClick={() => this.onLogin()} className='loginButton' variant="primary" type="button">
+                        <Button onClick={() => this.props.onLoginHandler(this.state.email , this.state.password)} className='loginButton' variant="primary" type="button">
                             Login
                         </Button>
                     </Form>

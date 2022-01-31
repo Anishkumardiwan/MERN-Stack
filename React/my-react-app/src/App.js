@@ -22,20 +22,49 @@ class App extends Component {
 
   constructor() {
     super();
-    this.state = { isLoggedIn: false };
+    this.state = { CurrentlyLoggedInUser: null };
+  }
+
+  validateCredentials(user) {
+    const correctCredential = { email: "anish@gmail.com", password: "12345" };
+    // console.log(user);
+
+    return new Promise((resolve, reject) => {
+      if (correctCredential.email===user.email && correctCredential.password===user.password) {
+        resolve(user);
+      } else {
+        reject("OOPS! Invalid Credentials");
+      }
+    });
+
+
+  }
+
+  onLogin(email, password) {
+
+    // Call some api to check credential are correct
+    const user = { email, password }
+    // console.log(user);
+
+    this.validateCredentials(user).then(user => {
+      this.setState({ CurrentlyLoggedInUser: user });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   render() {
     return (
       <div>
         {
-          (this.state.isLoggedIn) ?
+          (this.state.CurrentlyLoggedInUser) ?
             <>
               <Header />
               <Main />
               <Footer />
             </> :
-            <LoginForm />
+            <LoginForm onLoginHandler={this.onLogin.bind(this)} />
         }
       </div>
     );
