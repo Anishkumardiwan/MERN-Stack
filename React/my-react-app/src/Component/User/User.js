@@ -4,11 +4,11 @@ import './User.css';
 const User = (props) => {
     const userDetails = props.userDetails;
 
-    const { title, firstName, lastName, picture } = userDetails;
-    const fullName = title.toUpperCase() + " " + firstName + " " + lastName;
+    const { firstName, lastName, picture } = userDetails;
+    const fullName =firstName + " " + lastName;
 
     return (
-        <div className="user-box">
+        <div onClick={() => props.onUserClick(userDetails)} className="user-box">
             <div className="image-box">
                 <img src={picture} width="200px" height="200px" alt="" />
             </div>

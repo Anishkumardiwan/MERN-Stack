@@ -1,170 +1,69 @@
+import { Component } from 'react';
 import './UserList.css';
 import User from "../User/User";
+import Spinner from "../Common/Spinner";
+import DetailUser from "../DetailUser/DetailUser"
 
-const usersData = [
-    {
-        "id": "60d0fe4f5311236168a109ca",
-        "title": "ms",
-        "firstName": "Sara",
-        "lastName": "Andersen",
-        "picture": "https://randomuser.me/api/portraits/women/58.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109cb",
-        "title": "miss",
-        "firstName": "Edita",
-        "lastName": "Vestering",
-        "picture": "https://randomuser.me/api/portraits/med/women/89.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109cc",
-        "title": "ms",
-        "firstName": "Adina",
-        "lastName": "Barbosa",
-        "picture": "https://randomuser.me/api/portraits/med/women/28.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109cd",
-        "title": "mr",
-        "firstName": "Roberto",
-        "lastName": "Vega",
-        "picture": "https://randomuser.me/api/portraits/med/men/25.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109ce",
-        "title": "mr",
-        "firstName": "Rudi",
-        "lastName": "Droste",
-        "picture": "https://randomuser.me/api/portraits/med/men/83.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109cf",
-        "title": "mrs",
-        "firstName": "Carolina",
-        "lastName": "Lima",
-        "picture": "https://randomuser.me/api/portraits/med/women/5.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d0",
-        "title": "mr",
-        "firstName": "Emre",
-        "lastName": "Asikoglu",
-        "picture": "https://randomuser.me/api/portraits/med/men/23.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d1",
-        "title": "mr",
-        "firstName": "Kent",
-        "lastName": "Brewer",
-        "picture": "https://randomuser.me/api/portraits/med/men/52.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d2",
-        "title": "mr",
-        "firstName": "Evan",
-        "lastName": "Carlson",
-        "picture": "https://randomuser.me/api/portraits/med/men/80.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d3",
-        "title": "mr",
-        "firstName": "Friedrich-Karl",
-        "lastName": "Brand",
-        "picture": "https://randomuser.me/api/portraits/med/men/7.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d4",
-        "title": "mr",
-        "firstName": "Valentin",
-        "lastName": "Ortega",
-        "picture": "https://randomuser.me/api/portraits/med/men/3.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d5",
-        "title": "mrs",
-        "firstName": "Sibylle",
-        "lastName": "Leibold",
-        "picture": "https://randomuser.me/api/portraits/med/women/89.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d6",
-        "title": "mrs",
-        "firstName": "Elisa",
-        "lastName": "Lorenzo",
-        "picture": "https://randomuser.me/api/portraits/med/women/89.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d7",
-        "title": "mr",
-        "firstName": "Leevi",
-        "lastName": "Savela",
-        "picture": "https://randomuser.me/api/portraits/med/men/67.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d8",
-        "title": "mrs",
-        "firstName": "Karoline",
-        "lastName": "Sviggum",
-        "picture": "https://randomuser.me/api/portraits/med/women/61.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109d9",
-        "title": "ms",
-        "firstName": "Nuria",
-        "lastName": "Leon",
-        "picture": "https://randomuser.me/api/portraits/med/women/93.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109da",
-        "title": "mr",
-        "firstName": "Lance",
-        "lastName": "Foster",
-        "picture": "https://randomuser.me/api/portraits/med/men/13.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109db",
-        "title": "miss",
-        "firstName": "Naomi",
-        "lastName": "Rodrigues",
-        "picture": "https://randomuser.me/api/portraits/med/women/39.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109dc",
-        "title": "mr",
-        "firstName": "Evan",
-        "lastName": "Roux",
-        "picture": "https://randomuser.me/api/portraits/med/men/59.jpg"
-    },
-    {
-        "id": "60d0fe4f5311236168a109dd",
-        "title": "mr",
-        "firstName": "Miguel",
-        "lastName": "Lima",
-        "picture": "https://randomuser.me/api/portraits/med/men/31.jpg"
+class UserList extends Component {
+
+    constructor(props) {
+        super();
+        this.state = {
+            isModalOpen: false,
+            clickedUser: null
+        }
     }
-];
 
-const showUsers = () => {
-    return (
-        usersData.map((user) => {
-            return <div><User userDetails={user} /></div> ;
+    onUserClick(user) {
+        fetch(`https://dummyapi.io/data/v1/user/${user.id}`, {
+            headers: {
+                "app-id": "61ed31db887c0138889d09ee"
+            }
+        }).then(data => data.json())
+            .then(user => {
+                this.setState({
+                    isModalOpen: true,
+                    clickedUser: user
+                })
+
+            });
+    }
+
+    onDeleteUser(user) {
+        fetch(`https://dummyapi.io/data/v1/user/${user.id}`, { method: 'DELETE' })
+            .then((data) => console.log("delete successful"));
+    }
+
+    onModelClose() {
+        this.setState({
+            isModalOpen: false
         })
-    );
-}
+    }
 
-const UserList = () => {
-    return (
-        <div className="user-list-box" >
+    showUsers() {
+        return this.props.usersData.map((user) => {
+            return <div> <User onUserClick={this.onUserClick.bind(this)} userDetails={user} /> </div>
+        });
+    }
 
-            <div className="head-box">
-                <h1>Users</h1>
+    render() {
+        return (
+            <div className="user-list-box" >
+
+                <div className="all-users-box">
+                    {
+                        (!this.props.usersData) ?
+                            <Spinner /> :
+                            this.showUsers()
+                    }
+                </div>
+                {
+                    this.state.isModalOpen &&
+                    <DetailUser userDetails={this.state.clickedUser} onModelClose={this.onModelClose.bind(this)} onDeleteUser={this.onDeleteUser.bind(this)} />
+                }
             </div>
-
-            <div className="all-users-box">
-                {showUsers()}
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default UserList;    

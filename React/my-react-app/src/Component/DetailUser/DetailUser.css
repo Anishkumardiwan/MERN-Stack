@@ -1,0 +1,45 @@
+
+.modals{
+    height: 80vh;
+    width: 80vw;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    background-color: rgba(211, 211, 211, 0.05);
+    z-index: 5;
+}
+
+.modal-row{
+    /* border: 5px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.modal-row .left-col{
+    /* border: 4px solid purple; */
+    width: 40%;
+    margin-right: 15px;
+}
+
+.image-box{
+    text-align: center;
+}
+
+.left-col img{
+    /* border: 2px solid red; */
+    width: 80%;
+    height: 50%;
+}
+
+.left-col p{
+text-align: center;
+font-size: 20px;
+font-weight: bold;
+}
+
+.modal-row .right-col{
+    /* border: 4px solid palegreen; */
+    width: 60%;
+}

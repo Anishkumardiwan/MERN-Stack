@@ -2,6 +2,7 @@
 {
     /* border: 1px solid red; */
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -10,4 +11,10 @@
     /* border: 1px solid red; */
     text-align: center;
     font-size: 22px;
+}
+
+@media only screen and (max-width:769px){
+    .all-users-box{
+        display: inline-block;
+    }
 }
