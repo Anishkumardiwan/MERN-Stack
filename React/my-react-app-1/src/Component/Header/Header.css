@@ -1,0 +1,18 @@
+.header{
+    /* border: 5px solid red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 0px 30px;
+}
+
+.header .link-box{
+    /* border: 2px solid red; */
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    cursor: pointer;
+}

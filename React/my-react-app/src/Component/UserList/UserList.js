@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './UserList.css';
 import User from "../User/User";
 import Spinner from "../Common/Spinner";
-import DetailUser from "../DetailUser/DetailUser"
+import DetailUser from "../DetailUser/DetailUser";
 
 class UserList extends Component {
 
@@ -10,28 +10,33 @@ class UserList extends Component {
         super();
         this.state = {
             isModalOpen: false,
-            clickedUser: null
+            clickedUser: null,
+            isSpinnerOpen: true
         }
     }
 
     onUserClick(user) {
-        fetch(`https://dummyapi.io/data/v1/user/${user.id}`, {
+        this.setState({
+            isModalOpen: true,
+            clickedUser: user
+        });
+    }
+
+    onDeleteUser() {
+        // console.log(this.state.clickedUser.id);
+        const id = this.state.clickedUser.id;
+        fetch(`https://dummyapi.io/data/v1/user/${id}`, {
+            method: 'DELETE',
             headers: {
                 "app-id": "61ed31db887c0138889d09ee"
             }
-        }).then(data => data.json())
-            .then(user => {
+        })
+            .then((data) => {
                 this.setState({
-                    isModalOpen: true,
-                    clickedUser: user
-                })
-
+                    isModalOpen: false
+                });
+                // this.props.refreshData();
             });
-    }
-
-    onDeleteUser(user) {
-        fetch(`https://dummyapi.io/data/v1/user/${user.id}`, { method: 'DELETE' })
-            .then((data) => console.log("delete successful"));
     }
 
     onModelClose() {
@@ -59,7 +64,7 @@ class UserList extends Component {
                 </div>
                 {
                     this.state.isModalOpen &&
-                    <DetailUser userDetails={this.state.clickedUser} onModelClose={this.onModelClose.bind(this)} onDeleteUser={this.onDeleteUser.bind(this)} />
+                    <DetailUser onDeleteUser={()=>this.onDeleteUser()} onModelClose={()=>this.onModelClose()} userDetails={this.state.clickedUser} isModalOpen={this.state.isModalOpen} />
                 }
             </div>
         );

@@ -1,0 +1,15 @@
+.main{
+    border: 3px solid slateblue;
+    /* height: 90vh; */
+}
+
+.search-box{
+    margin: 20px;
+    text-align: center;
+}
+
+.search-box input{
+    border: 3px solid grey;
+    width: 260px;
+    padding: 4px;
+}

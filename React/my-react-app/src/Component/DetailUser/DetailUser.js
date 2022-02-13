@@ -1,40 +1,52 @@
-import { Modal, Button } from 'react-bootstrap';
+import { React, Component } from 'react';
+import { Modal } from 'react-bootstrap';
+import Spinner from '../Common/Spinner';
+import ModalDetail from '../ModalDetail/ModalDetail';
 import './DetailUser.css';
 
-function DetailUser(props) {
-    const userAddress = props.userDetails.location.street + ' ' + props.userDetails.location.city + ' ' + props.userDetails.location.state + ' ' + props.userDetails.location.country;
-    return (
-        <div className='modals'>
-            <Modal.Dialog>
-                <Modal.Header closeButton onClick={props.onModelClose}>
-                    <Modal.Title><b>ID:</b> {props.userDetails.id} </Modal.Title>
-                </Modal.Header>
+class DetailUser extends Component {
 
-                <Modal.Body>
-                    <div className="modal-row">
-                        <div className="left-col">
-                            <div className='image-box'>
-                                <img src={props.userDetails.picture} alt="" />
-                            </div>
-                            <p>{props.userDetails.firstName + ' ' + props.userDetails.lastName}</p>
-                        </div>
+    constructor(props) {
+        super();
+        this.state = {
+            isLoading: true,
+            clickedUser: null
+        }
+    }
 
-                        <div className="right-col">
-                            <p><b>Gender:</b> {props.userDetails.gender}</p>
-                            <p><b>Email:</b> {props.userDetails.email}</p>
-                            <p><b>Phone:</b> {props.userDetails.phone}</p>
-                            <p><b>Address:</b> {userAddress}</p>
-                        </div>
-                    </div>
-                </Modal.Body>
+    componentDidMount() {
+        fetch(`https://dummyapi.io/data/v1/user/${this.props.userDetails.id}`, {
+            headers: {
+                "app-id": "61ed31db887c0138889d09ee"
+            }
+        }).then(data => data.json())
+            .then(user => {
+                this.setState({
+                    isLoading: false,
+                    clickedUser: user
+                })
 
-                <Modal.Footer>
-                    <Button variant="info">Edit</Button>
-                    <Button onClick={() => props.onDeleteUser(props.userDetails)} variant="danger">Delete</Button>
-                </Modal.Footer>
-            </Modal.Dialog>
-        </div>
-    );
+            });
+    }
+
+    render() {
+
+        // console.log(this.props)
+
+        return (
+            <div className='modals'>
+                <Modal.Dialog>
+
+                    {
+                        (this.state.isLoading) ?
+                            <div className='spinner-box'><Spinner /></div> :
+                            <ModalDetail onModelClose={this.props.onModelClose} onDeleteUser={this.props.onDeleteUser} userDetails={this.state.clickedUser} />
+                    }
+
+                </Modal.Dialog>
+            </div>
+        );
+    }
 }
 
 export default DetailUser;

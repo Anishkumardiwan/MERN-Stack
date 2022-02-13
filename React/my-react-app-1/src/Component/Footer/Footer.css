@@ -1,0 +1,31 @@
+.footer{
+    /* border: 5px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 0px 30px;
+}
+
+.footer .head-box{
+    /* border: 1px solid red; */
+    align-items: center;
+}
+
+.footer .link-box{
+    /* border: 1px solid red; */
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .social-media-box{
+    /* border: 1px solid red; */
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

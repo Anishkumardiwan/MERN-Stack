@@ -1,0 +1,22 @@
+.user-box{
+    border: 4px solid black;
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.image-box{
+    border: 1.5px solid grey;
+    text-align: center;
+}
+
+.name-box h2{
+    font-size: 25px;
+}
+
